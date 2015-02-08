@@ -1,5 +1,6 @@
 <?php
 //call db functions to add user to the DB
+session_start();
 	function addToDB($uname, $pass, $dropb, $gdrive){
 		$servername = "localhost";
 		$username = "root";
@@ -12,7 +13,9 @@
 		if(mysqli_query($conn, $sql)){
 			echo "success";
 		}
-		header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
+		$_SESSION["uid"]=mysqli_query($conn, "SELECT id FROM identity WHERE uname =".$uname." " );
+		echo $_SESSION["uid"];
+		//header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
 
 
 	}

@@ -62,13 +62,37 @@
 
     <div class="container" >
 
-      <form class="form-signin" action="createAccount.php" method="post">
+      <form class="form-signin" action="settingScript.php" method="post">
         <h2 class="form-signin-heading">Please setup your cloud services</h2>
         <?php
-          if($_GET["drop"]==1){
-            echo '<h2 class="form-signin-heading">Dropbox Setup</h2>';
-            echo '<input type="text" name="uname" class="input-block-level" placeholder="Dropbox Email">';
+          require_once "dropbox-sdk/Dropbox/autoload.php";
+          use \Dropbox as dbx;
 
+          include 'DropboxCon.php';
+
+          if($_GET["drop"]==1){
+          //if(1==1){
+            $appInfo = dbx\AppInfo::loadFromJsonFile("app-info.json");
+            $webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
+            $dbox = new DropboxCon();
+            echo '<h2 class="form-signin-heading">Dropbox Setup</h2>';
+            echo '<input type="text" name="uname" class="input-block-level" placeholder="Dropbox Email"><br>';
+            echo '<a href="'.$dbox->initializeUser($webAuth).'" target="_blank">Click here to activate Dropbox</a>';
+            echo '<br><br>';
+            echo '<input type="text" name="uname" class="input-block-level" placeholder ="Copy Authentication code"><br>';
+
+          }
+          if($_GET["drive"]==1){
+          //if(1==1){
+            $appInfo = dbx\AppInfo::loadFromJsonFile("app-info.json");
+            $webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
+            $dbox = new DropboxCon();
+            echo '<h2 class="form-signin-heading">Google Drive Setup</h2>';
+            echo '<input type="text" name="uname" class="input-block-level" placeholder="Gmail"><br>';
+            echo '<a href="'.$dbox->initializeUser($webAuth).'" target="_blank">Click here to activate Gmail</a>';
+            echo '<br><br>';
+            echo '<input type="text" name="uname" class="input-block-level" placeholder ="Copy Authentication code"><br>';
+            
           }
         ?>
         <button class="btn btn-large btn-primary" type="submit">Finish Setup</button>
