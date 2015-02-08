@@ -14,13 +14,14 @@ session_start();
 			echo "success";
 		}
 		$row=mysqli_query($conn, "SELECT * FROM identity WHERE uname ='$uname' " );
-		echo $row["id"];
+		print_r($row);
 		//header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
 
 
 	}
 	$dropbox=0;
 	$googledrive=0;
+
 	if(isset($_POST["dbox"])){
 		$dropbox=1;
 	}
