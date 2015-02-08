@@ -8,16 +8,16 @@ session_start();
 		$dbname = "v1";
 
 // Create connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn = new mysqli()($servername, $username, $password, $dbname);
 		$sql = "INSERT INTO identity(uname, pass) VALUES ('$uname', '$pass')";
 		if(mysqli_query($conn, $sql)){
 			echo "success";
 		}
-		$row=mysqli_query($conn, "SELECT * FROM identity WHERE uname ='$uname' " );
+		$result=mysqli_query($conn, "SELECT * FROM identity WHERE uname ='$uname' ");
 		//print_r($row);
-		while($row = $result->fetch_assoc()) {
+		/*while($row = $result->fetch_assoc()) {
         	echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-    	}
+    	}*/
 		//header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
 
 
