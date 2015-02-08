@@ -13,7 +13,7 @@ session_start();
 		if(mysqli_query($conn, $sql)){
 			echo "success";
 		}
-		$test=mysqli_query($conn, "SELECT id FROM identity WHERE uname =".$uname." " );
+		$test=mysqli_query($conn, "SELECT id FROM identity WHERE uname ='$uname' " );
 		echo $test["id"];
 		//header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
 
