@@ -1,0 +1,33 @@
+<?php
+header('Content-type: application/json');
+if($_POST)
+{		
+        	$con=mysqli_connect("localhost", "root", "tom", "v1");
+
+        	if (mysqli_connect_errno())
+        	{
+            	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        	}
+			
+			$id = $_POST ['ID'];
+			
+			mysqli_query($con,
+			"INSERT INTO identity (id, db, drive) VALUES ('$id', '$db', '$drive') ");
+			mysqli_query($con,
+			"INSERT INTO trend (date) VALUES ('$date')  WHERE comid = '$comid' ");
+        	mysqli_query($con, 
+			"INSERT INTO complications (userid, " . $_POST['COMID'] . ") VALUES (" . $_POST['FIN'] . ", '1') ");
+        	mysqli_query($con, 
+			"UPDATE complications set " . $_POST['COMID'] . " = 1 WHERE userid = " . $_POST['FIN'] );
+
+        	mysqli_close($con);
+			
+        	echo '{"success":1}';
+}
+
+else
+{
+    echo '{"success":0,"error_message":"no post"}';
+}
+     
+?>

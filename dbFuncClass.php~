@@ -1,0 +1,12 @@
+<?php
+
+class dbfunc
+{
+
+}
+
+$obj = new dbfunc;
+
+?>
+
+
