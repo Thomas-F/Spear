@@ -13,7 +13,7 @@ class DropboxCon{
 	}
 	public function getUserAccessToken($authcode, $webAuth){
 		list($accessToken, $dropboxUserId) = $webAuth->finish($authCode);
-		print "Access Token: " . $accessToken . "\n";
+		return $accessToken;
 	}
 	public function connectToUser(){}
 }

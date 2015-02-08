@@ -62,38 +62,50 @@
 
     <div class="container" >
 
-      <form class="form-signin" action="settingScript.php" method="post">
+      <form class="form-signin" action="settingsScript.php" method="post">
         <h2 class="form-signin-heading">Please setup your cloud services</h2>
         <?php
           require_once "dropbox-sdk/Dropbox/autoload.php";
           use \Dropbox as dbx;
 
           include 'DropboxCon.php';
-
+          session_start();
+          //$_SESSION["uid"]
+          //$n= 0;
           if($_GET["drop"]==1){
           //if(1==1){
             $appInfo = dbx\AppInfo::loadFromJsonFile("app-info.json");
             $webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
+            $_SESSION["dbsess"]= $webAuth;
             $dbox = new DropboxCon();
             echo '<h2 class="form-signin-heading">Dropbox Setup</h2>';
-            echo '<input type="text" name="uname" class="input-block-level" placeholder="Dropbox Email"><br>';
+            echo '<input type="text" name="unamedb" class="input-block-level" placeholder="Dropbox Email"><br>';
             echo '<a href="'.$dbox->initializeUser($webAuth).'" target="_blank">Click here to activate Dropbox</a>';
             echo '<br><br>';
-            echo '<input type="text" name="uname" class="input-block-level" placeholder ="Copy Authentication code"><br>';
+            echo '<input type="text" name="authcodedb" class="input-block-level" placeholder ="Copy Authentication code"><br>';
+            //$n++;
 
+            $_SESSION["dbox"]=1;
+          }else{
+            $_SESSION["dbox"]=0;
           }
           if($_GET["drive"]==1){
           //if(1==1){
             $appInfo = dbx\AppInfo::loadFromJsonFile("app-info.json");
             $webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
+            $_SESSION["gdsess"]= $webAuth;
             $dbox = new DropboxCon();
             echo '<h2 class="form-signin-heading">Google Drive Setup</h2>';
-            echo '<input type="text" name="uname" class="input-block-level" placeholder="Gmail"><br>';
+            echo '<input type="text" name="unamegd" class="input-block-level" placeholder="Gmail"><br>';
             echo '<a href="'.$dbox->initializeUser($webAuth).'" target="_blank">Click here to activate Gmail</a>';
             echo '<br><br>';
-            echo '<input type="text" name="uname" class="input-block-level" placeholder ="Copy Authentication code"><br>';
-            
+            echo '<input type="text" name="authcodegd" class="input-block-level" placeholder ="Copy Authentication code"><br>';
+            $_SESSION["gdrive"]=1;
+
+          }else{
+            $_SESSION["gdrive"]=0;            
           }
+          
         ?>
         <button class="btn btn-large btn-primary" type="submit">Finish Setup</button>
 

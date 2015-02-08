@@ -16,9 +16,10 @@ session_start();
 		$result=mysqli_query($conn, "SELECT * FROM identity WHERE uname ='$uname' ");
 		//int_r($row);
 		while($row = mysqli_fetch_assoc($result)) {
-        	echo "id: " . $row["id"]. "<br>";
+        	$_SESSION["uid"];
+
     	}
-		//header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
+		header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
 
 
 	}
