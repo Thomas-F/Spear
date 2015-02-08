@@ -8,7 +8,7 @@ session_start();
 		$dbname = "v1";
 
 // Create connection
-		$conn = new mysqli()($servername, $username, $password, $dbname);
+		$conn = new mysqli($servername, $username, $password, $dbname);
 		$sql = "INSERT INTO identity(uname, pass) VALUES ('$uname', '$pass')";
 		if(mysqli_query($conn, $sql)){
 			echo "success";
