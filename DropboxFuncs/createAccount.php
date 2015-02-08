@@ -26,10 +26,10 @@ session_start();
 	$dropbox=0;
 	$googledrive=0;
 
-	if(isset($_POST["dbox"])){
+	if($_POST["dbox"] ==1 ){
 		$dropbox=1;
-	}
-	if(isset($_POST["gdrive"])){
+	}	
+	if($_POST["gdrive"]==1){
 		$googledrive=1;
 	}
 	addToDB($_POST["uname"], $_POST["password"], $dropbox, $googledrive);
