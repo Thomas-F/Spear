@@ -8,10 +8,11 @@
 
 // Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
-		$sql = "INSERT INTO identity(dbox, drive, uname, pass) VALUES ('$dropb', '$gdrive', '$uname', '$pass')";
+		$sql = "INSERT INTO identity(uname, pass) VALUES ('$uname', '$pass')";
 		if(mysqli_query($conn, $sql)){
 			echo "success";
 		}
+		header('Location: settings.php?drop='.$dropb.'&drive='.$gdrive.'');
 
 
 	}
